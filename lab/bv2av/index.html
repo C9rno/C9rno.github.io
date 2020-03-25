@@ -53,15 +53,15 @@
     function enc(x) {
         av = x
         x = (x^xor)+add
-        var bv = ''
+        var rs = ''
         var r = new Array ('B','V','1',' ',' ','4',' ','1',' ','7')
         for (i=0;i<6;i++) {
             r[s[i]]=table[parseInt(x/Math.pow(58,i))%58]
         }
         r.forEach (function(e) {
-            bv += e
+            rs += e
         })
-        var rf = new Array (av, bv)
+        var rf = new Array (av, rs)
         return rf
     }
 
@@ -70,7 +70,7 @@
         for (i=0;i<6;i++) {
             av+=table.indexOf([x[s[i]]])*Math.pow(58,i)
         }
-        r = (r-add)^xor
+        av = (r-add)^xor
         var rf = new Array (av, x)
         return rf
     }
@@ -102,7 +102,7 @@
       <label>AV Code</label>
     </div>
     <h6>*Note that 'av' is not included</h6>
-    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="runEnc()">Encode</button>
+    <button type="button" class="mui-btn mui-btn--raised mui-btn--primary" onclick="runEnc()">Encode</button>
 </form>
 </br>
 <form class="mui-form">
@@ -111,7 +111,7 @@
       <input type="text" id="decForm" placeholder="(Like BV1QE411G7qD)">
       <label>BV Code</label>
     </div>
-    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="runDec()">Decode</button>
+    <button type="button" class="mui-btn mui-btn--raised mui-btn--primary" onclick="runDec()">Decode</button>
 </form>
 </br></br>
 <h3>Result</h3>
