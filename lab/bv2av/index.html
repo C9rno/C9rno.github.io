@@ -50,45 +50,66 @@
     var xor = 177451812
     var add = 8728348608
     
-    function dec(x) {
-        var r = 0
-        for (i=0;i<6;i++) {
-            r+=table.indexOf([x[s[i]]])*Math.pow(58,i)
-        }
-        r = (r-add)^xor
-        return r
-    }
-    
     function enc(x) {
+        av = x
         x = (x^xor)+add
-        var rs = ''
+        var bv = ''
         var r = new Array ('B','V','1',' ',' ','4',' ','1',' ','7')
         for (i=0;i<6;i++) {
             r[s[i]]=table[parseInt(x/Math.pow(58,i))%58]
         }
         r.forEach (function(e) {
-            rs += e
+            bv += e
         })
-        return rs
+        var rf = new Array (av, bv)
+        return rf
     }
+
+    function dec(x) {
+        var av = 0
+        for (i=0;i<6;i++) {
+            av+=table.indexOf([x[s[i]]])*Math.pow(58,i)
+        }
+        r = (r-add)^xor
+        var rf = new Array (av, x)
+        return rf
+    }
+
+    function runEnc(x) {
+        addRow(enc(x))
+    }
+
+    function runDec(x) {
+        addRow(dec(x))
+    }
+    
+    function addRow(rf) {
+        var currentRows = document.getElementById("Result").rows.length;
+        var insertTr = document.getElementById("Result").insertRow(currentRows)
+        var cellLeft = insertTr.insertCell(0)
+        cellLeft.appendChild(document.createTextNode(rf[0]))
+        var cellRight = insertTr.insertCell(1)
+        cellRight.appendChild(document.createTextNode(rf[1]))
+    }
+        
 </script>
-<form class="mui-form">
-    <legend>BV to AV (Decode)</legend>
-    <div class="mui-textfield">
-      <input type="text" placeholder="(Like BV1QE411G7qD)">
-      <label>BV Code</label>
-    </div>
-    <button class="mui-btn mui-btn--raised mui-btn--primary">Decode</button>
-</form>
-</br>
 <form class="mui-form">
     <legend>AV to BV (Encode)</legend>
     <div class="mui-textfield">
-      <input type="text" placeholder="(Like 114514)">
+      <input type="text" id="encForm" placeholder="(Like 114514)">
       <label>AV Code</label>
     </div>
     <h6>*Note that 'av' is not included</h6>
-    <button class="mui-btn mui-btn--raised mui-btn--primary">Encode</button>
+    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="""runEnc(document.getElementById("encForm").value)""">Encode</button>
+</form>
+</br>
+<form class="mui-form">
+    <legend>BV to AV (Decode)</legend>
+    <div class="mui-textfield">
+      <input type="text" id="decForm" placeholder="(Like BV1QE411G7qD)">
+      <label>BV Code</label>
+    </div>
+    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="""runDec(document.getElementById("decForm").value)""">Decode</button>
 </form>
 </br></br>
 <h3>Result</h3>
@@ -100,16 +121,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Cell 1-1</td>
-        <td>Cell 1-2</td>
-      </tr>
-      <tr>
-        <td>Cell 2-1</td>
-        <td>Cell 2-2</td>
-      </tr>
     </tbody>
-  </table>
+</table>
 </div>
 </div>
 <footer id="footer">
