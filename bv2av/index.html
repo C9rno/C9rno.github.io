@@ -3,47 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- load MUI -->
-    <link href="https://cdn.muicss.com/mui-0.10.1/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
+    <meta http-equiv="refresh" content="0;url=/lab/bv2av">
   </head>
   <body>
-    <!-- example content -->
-    <div class="mui-container">
-      <div class="mui-panel">
-        <script>
-            var table = 'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF'
-            var s = new Array(11,10,3,8,4,6)
-            var xor = 177451812
-            var add = 8728348608
-            
-            function dec(x) {
-                var r = 0
-                for (i=0;i<6;i++) {
-                    r+=table.indexOf([x[s[i]]])*Math.pow(58,i)
-                }
-                r = (r-add)^xor
-                return r
-            }
-            
-            function enc(x) {
-                x = (x^xor)+add
-                var rs = ''
-                var r = new Array ('B','V','1',' ',' ','4',' ','1',' ','7')
-                for (i=0;i<6;i++) {
-                    r[s[i]]=table[parseInt(x/Math.pow(58,i))%58]
-                }
-                r.forEach (function(e) {
-                    rs += e
-                })
-                return rs
-            }
-        </script>
-        <h1>My Title</h1>
-        <button class="mui-btn mui-btn--primary mui-btn--raised">My Button</button>
-
-      </div>
-    </div>
   </body>
 </html>
