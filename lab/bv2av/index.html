@@ -75,11 +75,13 @@
         return rf
     }
 
-    function runEnc(x) {
+    function runEnc() {
+        var x = getElementById("encForm")
         addRow(enc(x))
     }
 
-    function runDec(x) {
+    function runDec() {
+        var x = getElementById("decForm")
         addRow(dec(x))
     }
     
@@ -100,7 +102,7 @@
       <label>AV Code</label>
     </div>
     <h6>*Note that 'av' is not included</h6>
-    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="""runEnc(document.getElementById("encForm").value)""">Encode</button>
+    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="runEnc()">Encode</button>
 </form>
 </br>
 <form class="mui-form">
@@ -109,7 +111,7 @@
       <input type="text" id="decForm" placeholder="(Like BV1QE411G7qD)">
       <label>BV Code</label>
     </div>
-    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="""runDec(document.getElementById("decForm").value)""">Decode</button>
+    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="runDec()">Decode</button>
 </form>
 </br></br>
 <h3>Result</h3>
